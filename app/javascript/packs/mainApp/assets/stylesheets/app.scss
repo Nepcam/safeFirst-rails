@@ -1,0 +1,87 @@
+.body {
+  background-color: antiquewhite;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.hero.body {
+  background-color: cadetblue;
+}
+
+.hero.is-primary {
+  color:#4a00a7;
+}
+.hero-body.has-text-centered {
+  background-color: turquoise;
+}
+
+.a.navbar-item.is-large.h1 {
+  color:#4a00a7;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.hero.is-primary .title {
+  color:#4a00a7;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.button.is-success {
+  background-color: #9d38da;
+}
+
+.box{
+  background-color: #eaeaea
+}
+
+div.title-image img{
+  width: 400px;
+}
+
+.slide img {
+  margin: 0 auto;
+}
+
+.navbarcolour {
+  background-color: rgb(86, 170, 219);
+  margin: auto;
+  padding: 35px;
+}
+
+
+.background-appear {
+  opacity: 0.01;
+  position: fixed;
+  transform: translate(100%);
+}
+
+.background-appear.background-appear-active {
+  position: fixed;
+  opacity: 1;
+  transition: position 3s ease-in;
+  transform: translate(0%);
+  transition: transform 1000ms ease-in-out;
+}
+
+.dashboardcontainer {
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+}
+
+.left {
+  float: left;
+  flex: 49%;
+}
+
+.right {
+  margin-left: 2%;
+  flex: 51%;
+}
+
+.welcome {
+  display: inline-block;
+}
+
+.charts {
+  display: flex;
+}
