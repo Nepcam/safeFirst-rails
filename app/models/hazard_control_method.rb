@@ -1,3 +1,3 @@
 class HazardControlMethod < ApplicationRecord
-    has_many: hazards
+    has_many :hazards
 end
