@@ -12,9 +12,9 @@ export default class Incidents extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        {/* <div>
           <Header/>
-        </div>
+        </div> */}
         <div>
           <IncidentHeader/>
         </div>

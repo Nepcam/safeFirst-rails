@@ -26,20 +26,30 @@ class Nav extends React.Component {
       <div className="container">
         <div className="navbar-brand">
           <span onClick={ this.toggleBurger } className={ `navbar-burger burger ${showBurger ? 'is-active' : ''}` }
-                data-target="navbarMenuHeroA">
+                data-target="navbarMenuHeroA">SF
             <span/>
             <span/>
             <span/>
           </span>
         </div>
         <div id="navbarMenuHeroA" className={ `navbar-menu ${showBurger ? "is-active" : ''}` }>
+          <div className="navbar-start">
+            { auth.isAuthenticated ? [
+              <Link to="/dashboard" className="navbar-item is-size-4">Dashboard</Link>,
+              <Link to="/dailymeeting" className="navbar-item is-size-4">Daily Meeting</Link>,
+              <Link to="/hsmeeting" className="navbar-item is-size-4">H&S Meeting</Link>,
+              <Link to="/incidents" className="navbar-item is-size-4">Incidents</Link>
+            ]
+              : <span></span>
+            }
+          </div>
           <div className="navbar-end">
             { auth.isAuthenticated
               ?
-              <div className="welcome">
-                Welcome { this.props.auth.user.user_name }!
+              // <div className="welcome">
+              //   Welcome { this.props.auth.user.user_name }!
                 <Link to="/" onClick={ this.props.logout } className="navbar-item is-large">Logout</Link>
-              </div>
+              // </div>
               : [
                 <Link key='hi' onClick={ this.toggleBurger } className="navbar-item is-large"
                       to='/login'><strong>Login</strong></Link>,

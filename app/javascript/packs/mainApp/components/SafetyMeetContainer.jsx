@@ -10,9 +10,9 @@ export default class SafetyMeetContainer extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        {/* <div>
           <Header/>
-        </div>
+        </div> */}
         <div>
           <hr/>
           <SafetyMeetList/>

@@ -13,9 +13,9 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        {/* <div>
           <Header/>
-        </div>
+        </div> */}
         <div>
           <DashboardHeader/>
         </div>

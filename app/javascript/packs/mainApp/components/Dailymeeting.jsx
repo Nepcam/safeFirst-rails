@@ -11,9 +11,9 @@ export default class Dailymeeting extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        {/* <div>
           <Header/>
-        </div>
+        </div> */}
         <div>
           <DailymeetingHeader/>
         </div>
