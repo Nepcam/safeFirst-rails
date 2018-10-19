@@ -26,7 +26,7 @@ class Nav extends React.Component {
       <div className="container">
         <div className="navbar-brand">
           <span onClick={ this.toggleBurger } className={ `navbar-burger burger ${showBurger ? 'is-active' : ''}` }
-                data-target="navbarMenuHeroA">SF
+                data-target="navbarMenuHeroA">
             <span/>
             <span/>
             <span/>
@@ -35,6 +35,7 @@ class Nav extends React.Component {
         <div id="navbarMenuHeroA" className={ `navbar-menu ${showBurger ? "is-active" : ''}` }>
           <div className="navbar-start">
             { auth.isAuthenticated ? [
+              <span>safeFirst</span>
               <Link to="/dashboard" className="navbar-item is-size-4">Dashboard</Link>,
               <Link to="/dailymeeting" className="navbar-item is-size-4">Daily Meeting</Link>,
               <Link to="/hsmeeting" className="navbar-item is-size-4">H&S Meeting</Link>,

@@ -34,6 +34,8 @@ export function loginUser(creds) {
     isAuthenticated: true,
     user
   }
+  //COME BACK AND FIX IN THE FUTURE. Disabled for dev and POC purposes. 
+
   // return dispatch => {
   //   dispatch(requestLogin());
   //   return request('post', 'auth/login', creds)
