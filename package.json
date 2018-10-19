@@ -4,9 +4,22 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
+    "chart.js": "^2.7.2",
+    "cors": "^2.8.3",
+    "jsonwebtoken": "^7.4.3",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-chartkick": "^0.3.0",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-slick": "^0.23.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "resolve-url-loader": "^3.0.0",
+    "superagent": "^2.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
