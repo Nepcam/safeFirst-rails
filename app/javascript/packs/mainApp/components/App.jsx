@@ -21,7 +21,6 @@ class App extends React.Component {
     return (
       <div>
         <Route exact path="/" component={ Dashboard }/>
-        <Route exact path="/dashboard" component={ Dashboard }/>
         <Route path="/incidents" component={ Incidents }/>
         <Route path="/hsmeeting" component={ Hsmeeting }/>
         <Route path="/hsmeetinglist" component={ SafetyMeetContainer }/>
