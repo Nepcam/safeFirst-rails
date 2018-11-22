@@ -7,7 +7,7 @@ import Dashboard from './Dashboard';
 import Landing from './Landing';
 import Incidents from './Incidents';
 import Hsmeeting from './Hsmeeting';
-import Dailymeeting from './Dailymeeting';
+import DailyMeeting from './DailyMeeting';
 import Nav from './Nav';
 import SafetyMeetContainer from './SafetyMeetContainer';
 
@@ -25,7 +25,7 @@ class App extends React.Component {
         <Route path="/incidents" component={ Incidents }/>
         <Route path="/hsmeeting" component={ Hsmeeting }/>
         <Route path="/hsmeetinglist" component={ SafetyMeetContainer }/>
-        <Route path="/dailymeeting" component={ Dailymeeting }/>
+        <Route path="/dailymeeting" component={ DailyMeeting }/>
       </div>
     )
   }

@@ -1,8 +1,7 @@
 import React from 'react';
-// import Header from './Header';
 import HazardsDay from './HazardsDay';
 import Statistics from './Statistics';
-import DashboardHeader from './DashboardHeader';
+import PageTitle from './PageTitle';
 import HazardsGeneric from './HazardsGeneric';
 
 export default class Dashboard extends React.Component {
@@ -13,12 +12,7 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        {/* <div>
-          <Header/>
-        </div> */}
-        <div>
-          <DashboardHeader/>
-        </div>
+        <PageTitle title="Dashboard" />
         <div className="dashboard-container">
           <div className="left">
             <HazardsDay/>
