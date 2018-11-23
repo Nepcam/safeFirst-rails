@@ -29,7 +29,7 @@ class Nav extends React.Component {
   }
 
   render() {
-    const { isAuthenticated, logout } = this.props;
+    const { isAuthenticated, userName, logout } = this.props;
     const { showBurger } = this.state;
 
     return (
@@ -66,6 +66,7 @@ class Nav extends React.Component {
             <div className="navbar-item">
               { isAuthenticated ?
                 <div className="buttons">
+                  { userName && <p className="navbar-item">Hello, { userName }</p> }
                   <button className="button is-dark" onClick={ logout }>
                     Log Out
                   </button>
@@ -95,7 +96,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    isAuthenticated: auth.isAuthenticated
+    isAuthenticated: auth.isAuthenticated,
+    userName: auth.userName
   }
 };
 

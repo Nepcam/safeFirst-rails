@@ -1,9 +1,9 @@
-import { isAuthenticated, getUserTokenInfo } from '../utils/auth';
+import { isAuthenticated } from '../utils/auth';
 
 const initialState = {
   isFetching: false,
   isAuthenticated: isAuthenticated(),
-  user: getUserTokenInfo(),
+  userName: '',
   errorMessage: ''
 };
 
@@ -21,7 +21,7 @@ export default function auth(state = initialState, action) {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        user: action.user
+        userName: action.userName
       };
     case 'LOGIN_FAILURE':
       return {
@@ -30,12 +30,23 @@ export default function auth(state = initialState, action) {
         isAuthenticated: false,
         errorMessage: action.message
       };
+    case 'LOGOUT_REQUEST':
+      return {
+        ...state,
+        isFetching: true,
+      };
     case 'LOGOUT_SUCCESS':
       return {
         ...state,
         isFetching: false,
         isAuthenticated: false,
-        user: null
+        userName: null
+      };
+    case 'LOGOUT_ERROR':
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.message
       };
     case 'REGISTER_REQUEST':
       return {

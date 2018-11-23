@@ -1,36 +1,25 @@
 const decode = require('jwt-decode');
 
-import { get, set } from './localstorage'
+import { getCookie, setCookie, deleteCookie } from "./cookie";
+
+const cookieName = 'safeFirstToken';
 
 export function isAuthenticated() {
-  // Disabled for dev purposes. 
-  // const token = get('token');
-
-  // if (token) {
-  //   const payload = decode(token);
-  //   const expiry = payload.exp;
-
-  //   if (expiry < new Date().getTime() / 1000) {
-  //     removeUser();
-  //     return false
-  //   }
-  //   return true
-  // } else {
-  //   return false
-  // }
-  return true;
+  const token = getCookie(cookieName);
+  return !!token;
 }
 
-export function saveUserToken(token) {
-  set('token', token);
+export function setUserToken(authHeader) {
+  const token = authHeader.split(' ')[1];
+  setCookie(cookieName, token);
+
   return decode(token);
 }
 
-export function getUserTokenInfo() {
-  const token = get('token');
-  return token ? decode(token) : null
+export function getUserToken() {
+  return getCookie(cookieName);
 }
 
-export function removeUser() {
-  set('token', null);
+export function removeUserToken() {
+  deleteCookie(cookieName);
 }
