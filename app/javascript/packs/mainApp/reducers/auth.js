@@ -62,6 +62,13 @@ export default function auth(state = initialState, action) {
         isAuthenticated: false,
         errorMessage: action.message
       };
+    case 'REGISTER_SUCCESS':
+      return {
+        ...state,
+        isFetching: false,
+        isAuthenticated: true,
+        userName: action.userName
+      };
     default:
       return state
   }

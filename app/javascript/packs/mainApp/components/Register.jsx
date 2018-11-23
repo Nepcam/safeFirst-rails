@@ -7,11 +7,12 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_name: '',
-      contact_details: '',
-      email_address: '',
+      name: '',
+      contact_number: '',
+      email: '',
+      home_address: '',
       password: '',
-      confirm_password: ''
+      password_confirmation: ''
     };
 
     this.updateDetails = this.updateDetails.bind(this);
@@ -26,43 +27,56 @@ class Register extends React.Component {
 
   submit(e) {
     e.preventDefault();
+
+    let { password, password_confirmation } = this.state;
+    if (password_confirmation !== password) {
+      return this.props.dispatch(loginError("Passwords must match!"));
+    }
+
+    this.props.dispatch(registerUserRequest({ user: this.state }));
     e.target.reset();
-    let { user_name, password, confirm_password, contact_details, email_address } = this.state;
-    if (confirm_password !== password) return this.props.dispatch(loginError("Passwords don't match"));
-    this.props.dispatch(registerUserRequest(this.state));
   }
 
   render() {
-    const { auth } = this.props;
+    const { errorMessage } = this.props;
 
     return (
-      <form className="Register form box" onSubmit={ this.submit }>
+      <form className="register-form" onSubmit={ this.submit }>
         <h1 className="title is-2">Register</h1>
         <hr/>
-        { auth.errorMessage && <span className="has-text-danger is-large">{ auth.errorMessage }</span> }
-        <label className="column is-6 is-offset-one-quarter label is-large has-text-centered">Username
-          <input required className="input is-large has-text-centered is-fullwidth" placeholder="User Name" type="text"
-                 name="user_name" onChange={ this.updateDetails }/>
+        { errorMessage && <span className="has-text-danger is-large">{ errorMessage }</span> }
+        <label className="column is-6 is-offset-one-quarter label is-large has-text-centered">Name
+          <input required className="input is-large has-text-centered is-fullwidth" placeholder="Sam I Am" type="text"
+                 name="name" onChange={ this.updateDetails }/>
         </label>
         <div className="columns">
-          <label className="column is-6 label is-large has-text-centered">Contact Details
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Contact Details"
-                   type="text" name="contact_details" onChange={ this.updateDetails }/>
+          <label className="column is-6 label is-large has-text-centered">Phone Number
+            <input required className="input is-large has-text-centered is-fullwidth" placeholder="022-555-5555"
+                   type="text" name="contact_number" onChange={ this.updateDetails }/>
           </label>
           <label className="column is-6 label is-large has-text-centered">Email Address
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Email Adress"
-                   type="text" name="email_address" onChange={ this.updateDetails }/>
+            <input required className="input is-large has-text-centered is-fullwidth"
+                   placeholder="example@safefirst.com"
+                   type="text" name="email" onChange={ this.updateDetails }/>
+          </label>
+        </div>
+        <br/>
+        <div className="columns">
+          <label className="column is-12 label is-large has-text-centered">Address
+            <input required className="input is-large has-text-centered is-fullwidth"
+                   placeholder="1 Test Lane, Wonka World"
+                   type="text" name="home_address" onChange={ this.updateDetails }/>
           </label>
         </div>
         <br/>
         <div className="columns">
           <label className="column is-6 label is-large has-text-centered">Password
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Password"
+            <input required className="input is-large has-text-centered is-fullwidth" placeholder="!am$ecure"
                    type="password" name="password" onChange={ this.updateDetails }/>
           </label>
           <label className="column is-6 label is-large has-text-centered">Confirm Password
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Confirm Password"
-                   type="password" name="confirm_password" onChange={ this.updateDetails }/>
+            <input required className="input is-large has-text-centered is-fullwidth" placeholder="!am$ecure"
+                   type="password" name="password_confirmation" onChange={ this.updateDetails }/>
           </label>
         </div>
         <input className="button is-success is-large is-fullwidth" value="Register" type="submit"/>
@@ -73,7 +87,7 @@ class Register extends React.Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    auth
+    errorMessage: auth.errorMessage
   }
 };
 
