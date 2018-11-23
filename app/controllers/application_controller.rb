@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include ActionController::MimeResponds
+  include Rails::Pagination
 
   protect_from_forgery unless: -> { request.format.json? }
   respond_to :json
