@@ -1,5 +1,6 @@
 import request from '../utils/api';
 import { setUserToken } from '../utils/auth';
+import { unsetCoverPage } from './login';
 
 function requestRegistration() {
   return {
@@ -30,6 +31,7 @@ export function registerUserRequest(credentials) {
           dispatch(registrationError(`${err.message}: ${err.response.body.error}`));
         } else {
           setUserToken(res.headers.authorization);
+          unsetCoverPage();
 
           dispatch(registrationSuccess(res.body.name));
           document.location = "/#";

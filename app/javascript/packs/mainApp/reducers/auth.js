@@ -3,6 +3,7 @@ import { isAuthenticated } from '../utils/auth';
 const initialState = {
   isFetching: false,
   isAuthenticated: isAuthenticated(),
+  isCoverPage: false,
   userName: '',
   errorMessage: ''
 };
@@ -68,6 +69,16 @@ export default function auth(state = initialState, action) {
         isFetching: false,
         isAuthenticated: true,
         userName: action.userName
+      };
+    case 'SET_COVER_PAGE':
+      return {
+        ...state,
+        isCoverPage: true,
+      };
+    case 'UNSET_COVER_PAGE':
+      return {
+        ...state,
+        isCoverPage: false,
       };
     default:
       return state

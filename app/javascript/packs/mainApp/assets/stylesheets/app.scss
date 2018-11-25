@@ -1,3 +1,8 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: 'Work Sans', sans-serif;
 }
@@ -6,9 +11,46 @@ body {
   margin: 25px 0;
 }
 
-// Used for register/login form
-.box {
-  background-color: #eaeaea
+#main-app {
+  height: 100%;
+
+  .landing-container {
+    margin-top: 50px;
+  }
+
+  // Used for register/login form
+  #full-cover {
+    background: url('../images/felledTree.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Full height */
+    height: 100%;
+
+    .login-registration {
+      width: 100%;
+
+      form {
+        vertical-align: middle;
+        background-color: white;
+        padding: 30px;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 10%;
+      }
+
+      @media only screen and (max-width: 1023px) {
+        form {
+          width: 90%;
+          margin-top: 20%;
+        }
+      }
+    }
+  }
 }
 
 .slide img {
