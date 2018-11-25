@@ -53,7 +53,7 @@ class App extends React.Component {
 
     return (
       <Router>
-        <div id={ isCoverPage ? 'full-cover' : '' }>
+        <div id={ (isCoverPage && !isAuthenticated) ? 'full-cover' : '' }>
           <Nav/>
           { isAuthenticated ? App.authenticatedComponent() : App.nonauthenticatedComponent() }
         </div>

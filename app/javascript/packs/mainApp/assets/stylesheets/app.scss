@@ -20,16 +20,16 @@ body {
 
   // Used for register/login form
   #full-cover {
-    background: url('../images/felledTree.jpg');
+    background: url('../images/felledTree.jpg') center no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    //background-position: center;
+    //background-repeat: no-repeat;
 
     /* Full height */
-    height: 100%;
+    min-height: 100%;
 
     .login-registration {
       width: 100%;
@@ -40,12 +40,30 @@ body {
         padding: 30px;
         width: 50%;
         margin: 0 auto;
+      }
+    }
+
+    .login {
+      form {
         margin-top: 10%;
       }
+    }
 
-      @media only screen and (max-width: 1023px) {
+    .registration {
+      form {
+        margin-top: 5%;
+      }
+    }
+
+    @media only screen and (max-width: 1023px) {
+      .login-registration {
         form {
           width: 90%;
+        }
+      }
+
+      .login {
+        form {
           margin-top: 20%;
         }
       }

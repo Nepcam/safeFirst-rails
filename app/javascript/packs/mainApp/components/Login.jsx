@@ -34,7 +34,7 @@ class Login extends React.Component {
     const { errorMessage } = this.props;
 
     return (
-      <div className="login-registration">
+      <div className="login-registration login">
         <form onSubmit={ this.submit }>
           { errorMessage && <p className="help is-danger is-large">{ errorMessage }</p> }
           <div className="field">
