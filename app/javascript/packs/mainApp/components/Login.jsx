@@ -1,17 +1,22 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { loginUser, loginError } from '../actions/login'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { loginUser, setCoverPage } from '../actions/login';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_name: '',
+      email: '',
       password: ''
     };
 
     this.updateDetails = this.updateDetails.bind(this);
     this.submit = this.submit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(setCoverPage());
   }
 
   updateDetails(e) {
@@ -22,34 +27,58 @@ class Login extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    let { user_name, password } = this.state;
-    this.props.dispatch(loginUser({ user_name, password }));
+    this.props.dispatch(loginUser({ user: this.state }));
   }
 
   render() {
-    const { auth } = this.props;
+    const { errorMessage } = this.props;
+
     return (
-      <form className="form box" onSubmit={ this.submit }>
-        <h1 className="title is-2">safeFirst</h1>
-        <hr/>
-        { auth.errorMessage && <span className="has-text-danger is-large">{ auth.errorMessage }</span> }
-        <label className="label is-large has-text-centered">Username
-          <input required className="input has-text-centered is-large is-fullwidth" placeholder="User Name" type="text"
-                 name="user_name" onChange={ this.updateDetails }/>
-        </label>
-        <label className="label is-large has-text-centered">Password
-          <input required className="input has-text-centered is-large is-fullwidth" placeholder="Password"
-                 type="password" name="password" onChange={ this.updateDetails }/>
-        </label>
-        <input className="button is-large is-fullwidth is-success" value='Login' type="submit"/>
-      </form>
+      <div className="login-registration login">
+        <form onSubmit={ this.submit }>
+          { errorMessage && <p className="help is-danger is-large">{ errorMessage }</p> }
+          <div className="field">
+            <label className="label" htmlFor="email">Email</label>
+            <div className="control has-icons-left has-icons-right">
+              <input required className="input" placeholder="test@safefirst.com" type="text" name="email"
+                     onChange={ this.updateDetails }/>
+              <span className="icon is-small is-left">
+              <i className="fas fa-envelope"/>
+            </span>
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="label" htmlFor="password">Password</label>
+            <p className="control has-icons-left">
+              <input required className="input" placeholder="Password" type="password" name="password"
+                     onChange={ this.updateDetails }/>
+              <span className="icon is-small is-left">
+              <i className="fas fa-lock"/>
+            </span>
+            </p>
+          </div>
+
+          <div className="field is-grouped">
+            <div className="control">
+              <input className="button is-primary" value='Login' type="submit"/>
+            </div>
+          </div>
+
+          <div className="field is-grouped">
+            <div className="control">
+              <span>Not a member yet?</span> <Link to="/register">Register</Link>
+            </div>
+          </div>
+        </form>
+      </div>
     )
   }
 }
 
 const mapStateToProps = ({ auth }) => {
   return {
-    auth
+    errorMessage: auth.errorMessage
   }
 };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 import SafetyMeetList from './SafetyMeetList';
 
 export default class SafetyMeetContainer extends React.Component {
@@ -10,13 +9,8 @@ export default class SafetyMeetContainer extends React.Component {
   render() {
     return (
       <div>
-        {/* <div>
-          <Header/>
-        </div> */}
-        <div>
-          <hr/>
-          <SafetyMeetList/>
-        </div>
+        <hr/>
+        <SafetyMeetList/>
       </div>
     )
   }

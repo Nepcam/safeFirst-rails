@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from './Header';
 import IncidentForm from './IncidentForm';
 import IncidentList from './IncidentList';
-import IncidentHeader from './IncidentHeader';
+import PageTitle from './PageTitle';
 
 export default class Incidents extends React.Component {
   constructor(props) {
@@ -12,12 +11,7 @@ export default class Incidents extends React.Component {
   render() {
     return (
       <div>
-        {/* <div>
-          <Header/>
-        </div> */}
-        <div>
-          <IncidentHeader/>
-        </div>
+        <PageTitle title="Incidents" />
         <div>
           <IncidentForm/>
           <hr/>

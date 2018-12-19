@@ -1,17 +1,41 @@
-import request from 'superagent';
-import { saveUserToken } from '../utils/auth';
-import { receiveLogin, loginError } from './login';
+import request from '../utils/api';
+import { setUserToken } from '../utils/auth';
+import { unsetCoverPage } from './login';
 
-export function registerUserRequest(creds) {
-  return (dispatch) => {
-    request
-      .post('/api/auth/register')
-      .send(creds)
-      .then(res => {
-        const userInfo = saveUserToken(res.body.token);
-        dispatch(receiveLogin(userInfo));
-        document.location = "/#/"
-      })
-      .catch(err => dispatch(loginError(err.response.body.message)));
+function requestRegistration() {
+  return {
+    type: 'REGISTER_REQUEST'
   }
+}
+
+export function registrationSuccess(userName) {
+  return {
+    type: 'REGISTER_SUCCESS',
+    userName
+  }
+}
+
+export function registrationError(message) {
+  return {
+    type: 'REGISTER_FAILURE',
+    message
+  }
+}
+
+export function registerUserRequest(credentials) {
+  return dispatch => {
+    dispatch(requestRegistration());
+    return request('post', '/users', credentials)
+      .end((err, res) => {
+        if (err || res.status !== 200) {
+          dispatch(registrationError(`${err.message}: ${err.response.body.error}`));
+        } else {
+          setUserToken(res.headers.authorization);
+          unsetCoverPage();
+
+          dispatch(registrationSuccess(res.body.name));
+          document.location = "/#";
+        }
+      });
+  };
 }

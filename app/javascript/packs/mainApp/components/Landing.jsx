@@ -1,12 +1,14 @@
 import React from 'react';
 import Slider from "react-slick";
+import connect from "react-redux/es/connect/connect";
 import fellingByPowerlines from '../assets/images/fellingByPowerlines.jpg';
 import Forestry from '../assets/images/Forestry.jpg';
 import planting from '../assets/images/planting.jpg';
 import pruner from '../assets/images/pruner.jpg';
 import treeFellpowerLines from '../assets/images/treeFellpowerLines.jpg';
+import { unsetCoverPage } from "../actions/login";
 
-export default class Landing extends React.Component {
+class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +21,10 @@ export default class Landing extends React.Component {
       ],
 
     }
+  }
+
+  componentDidMount() {
+    this.props.dispatch(unsetCoverPage());
   }
 
   render() {
@@ -35,15 +41,12 @@ export default class Landing extends React.Component {
     };
 
     return (
-      <div>
-        <div className="container">
-          <h1 className="title is-1">safeFirst</h1>
-        </div>
+      <div className="landing-container">
         <Slider { ...settings }>
           {
-            this.state.images.map(image => {
+            this.state.images.map((image, index) => {
               return (
-                <div className="slide"><img key={ image } src={ image }/></div>
+                <div className="slide" key={ index }><img src={ image }/></div>
               )
             })
           }
@@ -52,3 +55,5 @@ export default class Landing extends React.Component {
     )
   }
 }
+
+export default connect(null)(Landing);

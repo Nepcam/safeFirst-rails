@@ -1,28 +1,19 @@
-import request from 'superagent'
+// TODO: refactor into middleware
 
-import { get } from './localstorage'
-import { isAuthenticated } from './auth'
+import request from 'superagent';
 
-const baseURL = '/api/';
+import { isAuthenticated, getUserToken } from './auth';
 
 export default function consume(method = 'get', endpoint, data = {}) {
-  const dataMethod = method.toLowerCase() === 'get' && 'query' || 'send'
-  const token = get('token');
+  const dataMethod = method.toLowerCase() === 'get' && 'query' || 'send';
   const headers = {
     Accept: 'application/json'
   };
+
   if (isAuthenticated()) {
-    headers['Authorization'] = `Bearer ${token}`
+    headers['Authorization'] = `Bearer ${getUserToken()}`
   }
 
-  return request[method](baseURL + endpoint)
+  return request[method](endpoint)
     .set(headers)[dataMethod](data)
-    .then((res) => {
-      return res
-    })
-    .catch(err => {
-      throw err
-    })
 }
-
-

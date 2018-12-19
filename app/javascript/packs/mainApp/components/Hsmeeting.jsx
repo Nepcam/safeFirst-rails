@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from './Header';
 import SafetyMeet from './SafetyMeet';
 import HazardIn from './HazardIn';
-import HSmeetingHeader from './HsmeetingHeader';
+import PageTitle from './PageTitle';
 import Minutes from './Minutes';
 
 export default class Hsmeeting extends React.Component {
@@ -13,12 +12,7 @@ export default class Hsmeeting extends React.Component {
   render() {
     return (
       <div>
-        {/* <div>
-          <Header/>
-        </div> */}
-        <div>
-          <HSmeetingHeader/>
-        </div>
+        <PageTitle title="Health and Safety Meeting" />
         <div className="dashboard-container">
           <div className="left">
             <SafetyMeet/>

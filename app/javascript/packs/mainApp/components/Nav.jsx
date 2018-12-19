@@ -10,7 +10,16 @@ class Nav extends React.Component {
       showBurger: false
     };
 
+    this.closeBurger = this.closeBurger.bind(this);
     this.toggleBurger = this.toggleBurger.bind(this);
+  }
+
+  closeBurger() {
+    if (this.state.showBurger) {
+      this.setState({
+        showBurger: false
+      });
+    }
   }
 
   toggleBurger() {
@@ -20,48 +29,62 @@ class Nav extends React.Component {
   }
 
   render() {
-    const { auth, logout } = this.props;
+    const { isAuthenticated, userName, logout } = this.props;
     const { showBurger } = this.state;
-    return <nav className="navbar">
-      <div className="container">
+
+    return (
+      <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <span onClick={ this.toggleBurger } className={ `navbar-burger burger ${showBurger ? 'is-active' : ''}` }
-                data-target="navbarMenuHeroA">
-            <span/>
-            <span/>
-            <span/>
-          </span>
+          <a className="navbar-item" href="#">
+            <span>safeFirst</span>
+          </a>
+
+          <a role="button" className={ `navbar-burger burger ${showBurger ? 'is-active' : ''}` } aria-label="menu"
+             aria-expanded="false"
+             data-target="sf-navbar" onClick={ this.toggleBurger }>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-        <div id="navbarMenuHeroA" className={ `navbar-menu ${showBurger ? "is-active" : ''}` }>
+
+        <div id="sf-navbar" className={ `navbar-menu ${showBurger ? 'is-active' : ''}` }>
           <div className="navbar-start">
-            { auth.isAuthenticated ? [
-              <span>safeFirst</span>
-              <Link to="/dashboard" className="navbar-item is-size-4">Dashboard</Link>,
-              <Link to="/dailymeeting" className="navbar-item is-size-4">Daily Meeting</Link>,
-              <Link to="/hsmeeting" className="navbar-item is-size-4">H&S Meeting</Link>,
-              <Link to="/incidents" className="navbar-item is-size-4">Incidents</Link>
-            ]
-              : <span></span>
-            }
+            { isAuthenticated ? [
+              <Link onClick={ this.closeBurger } to="/dailymeeting" key="dailymeeting" className="navbar-item">
+                Daily Meeting
+              </Link>,
+              <Link onClick={ this.closeBurger } to="/hsmeeting" key="hsmeeting" className="navbar-item">
+                H&S Meeting
+              </Link>,
+              <Link onClick={ this.closeBurger } to="/incidents" key="incidents" className="navbar-item">
+                Incidents
+              </Link>
+            ] : '' }
           </div>
           <div className="navbar-end">
-            { auth.isAuthenticated
-              ?
-              // <div className="welcome">
-              //   Welcome { this.props.auth.user.user_name }!
-                <Link to="/" onClick={ this.props.logout } className="navbar-item is-large">Logout</Link>
-              // </div>
-              : [
-                <Link key='hi' onClick={ this.toggleBurger } className="navbar-item is-large"
-                      to='/login'><strong>Login</strong></Link>,
-                <Link key='hello' onClick={ this.toggleBurger } className="navbar-item"
-                      to='/register'><strong>Register</strong></Link>
-              ]
-            }
+            <div className="navbar-item">
+              { isAuthenticated ?
+                <div className="buttons">
+                  { userName && <p className="navbar-item">Hello, { userName }</p> }
+                  <button className="button is-dark" onClick={ logout }>
+                    Log Out
+                  </button>
+                </div> :
+                <div className="buttons">
+                  <Link onClick={ this.closeBurger } to="/register" key="register" className="button is-primary">
+                    Register
+                  </Link>
+                  <Link onClick={ this.closeBurger } to="/login" key="login" className="button is-dark">
+                    Log In
+                  </Link>
+                </div>
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    )
   }
 }
 
@@ -73,7 +96,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    auth
+    isAuthenticated: auth.isAuthenticated,
+    userName: auth.userName
   }
 };
 
