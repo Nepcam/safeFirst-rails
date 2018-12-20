@@ -59,6 +59,9 @@ class Nav extends React.Component {
               </Link>,
               <Link onClick={ this.closeBurger } to="/incidents" key="incidents" className="navbar-item">
                 Incidents
+              </Link>,
+              <Link onClick={ this.closeBurger } to="/sites" key="sites" className="navbar-item">
+                Sites
               </Link>
             ] : '' }
           </div>
