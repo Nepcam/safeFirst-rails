@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_014906) do
+ActiveRecord::Schema.define(version: 2018_12_20_205402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2018_12_20_014906) do
     t.integer "risk", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "site_id"
+    t.index ["site_id"], name: "index_hazards_on_site_id"
   end
 
   create_table "jwt_blacklist", force: :cascade do |t|
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_014906) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "hazards", "sites"
   add_foreign_key "site_logins", "sites"
   add_foreign_key "site_logins", "users"
 end
