@@ -7,6 +7,8 @@ RSpec.describe HazardsController do
   let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers(headers, user) }
 
   describe 'GET #index' do
+    let(:extract_id) { -> (h) { h['id'] } }
+
     before do
       request.headers.merge! auth_headers
       2.times do
@@ -17,8 +19,7 @@ RSpec.describe HazardsController do
 
     it 'returns all hazards tied to a specific site' do
       get :index, params: { site_id: site.id }
-      result     = JSON.parse(response.body)
-      extract_id = -> (h) { h['id'] }
+      result = JSON.parse(response.body)
 
       expect(result.count).to eq(2)
       expect(result.map(&extract_id)).to eq(Hazard.where(site: site).pluck(:id))
@@ -28,6 +29,16 @@ RSpec.describe HazardsController do
       get :index, params: { site_id: site.id }
 
       expect(response).to have_http_status(:ok)
+    end
+
+    it 'includes generic hazards, not tied to a site' do
+      create(:hazard, site: nil)
+
+      get :index, params: { site_id: site.id }
+      result = JSON.parse(response.body)
+
+      expect(result.count).to eq(3)
+      expect(result.map(&extract_id)).to eq(Hazard.where(site: [site, nil]).pluck(:id))
     end
   end
 end

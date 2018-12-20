@@ -7,7 +7,7 @@ class HazardsController < ApplicationController
   end
 
   def index
-    hazards = paginate Hazard.includes(:hazard_control_method, :hazard_category).where(site_id: params[:site_id])
+    hazards = paginate Hazard.includes(:hazard_control_method, :hazard_category).where(site_id: [params[:site_id], nil])
     render json: hazards.as_json(hazards_json_keys)
   end
 

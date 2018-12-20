@@ -23,13 +23,11 @@ HazardControlMethod.find_or_create_by!(name: 'Minimise')
 #Hazards
 csv_text = File.read(Rails.root.join('db', 'seed_data', 'Hazards.csv'))
 csv      = CSV.parse(csv_text, :headers => true)
-site     = Site.create(name: 'Initial', location: 'Wellington, New Zealand')
 
 csv.each do |row|
   next if Hazard.exists?(reference_number: row['reference_number'])
 
   hazard = Hazard.new(row.to_hash.slice('name', 'reference_number', 'control', 'risk'))
-  hazard.site = site
 
   hazard_category       = HazardCategory.find_by(name: row['category'])
   hazard_control_method = HazardControlMethod.find_by(name: row['hazard_control_method'])
