@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get '/dashboard', to: 'dashboard#index'
 
-  resources :sites, only: [:create] do
+  resources :sites, only: %i(create index) do
     resources :hazards, only: [:index]
   end
 
