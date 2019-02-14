@@ -5,7 +5,26 @@ RSpec.describe SitesController do
   let(:headers) { { 'Accept' => 'application/json', 'Content-Type' => 'application/json' } }
   let(:auth_headers) { Devise::JWT::TestHelpers.auth_headers(headers, user) }
 
-  describe "POST create" do
+  describe 'GET #index' do
+    before { request.headers.merge! auth_headers }
+
+    it 'returns success response' do
+      get :index
+
+      expect(response).to have_http_status(:ok)
+    end
+    it 'returns all sites tied to user' do
+      user.sites = [create(:site), create(:site)]
+
+      get :index
+
+      sites = JSON.parse(response.body)['sites']
+      expect(sites.length).to eq 2
+      expect(sites).to eq user.sites.as_json
+    end
+  end
+
+  describe "POST #create" do
     before { request.headers.merge! auth_headers }
 
     context "when params are valid" do

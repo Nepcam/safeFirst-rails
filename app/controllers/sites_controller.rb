@@ -1,6 +1,10 @@
 class SitesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    render json: { sites: current_user.sites.as_json }
+  end
+
   def create
     site = current_user.sites.new(site_params)
     
