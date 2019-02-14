@@ -43,3 +43,37 @@ export function createSite(site) {
       });
   };
 }
+
+function sitesFetchRequest() {
+  return {
+    type: 'SITES_FETCH_REQUEST'
+  }
+}
+
+export function sitesFetchSuccess(sites) {
+  return {
+    type: 'SITES_FETCH_SUCCESS',
+    sites
+  }
+}
+
+export function sitesFetchFailure(message) {
+  return {
+    type: 'SITES_FETCH_FAILURE',
+    message
+  }
+}
+
+export function fetchSites() {
+  return dispatch => {
+    dispatch(sitesFetchRequest());
+    return request('get', '/sites')
+      .end((err, res) => {
+        if (err || res.status !== 200) {
+          dispatch(sitesFetchFailure(`${err.message}: ${err.response.body.error}`));
+        } else {
+          dispatch(sitesFetchSuccess(res.body.sites));
+        }
+      });
+  };
+}
