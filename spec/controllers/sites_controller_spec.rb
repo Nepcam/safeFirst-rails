@@ -45,6 +45,10 @@ RSpec.describe SitesController do
 
         expect(response).to have_http_status(:ok)
       end
+
+      it 'ties the site to the expected user' do
+        expect{ post :create, params: valid_params }.to change(user.sites, :count)
+      end
     end
 
     context "when params are invalid" do
