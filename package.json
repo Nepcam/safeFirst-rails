@@ -1,6 +1,9 @@
 {
   "name": "safeFirst",
   "private": true,
+  "scripts": {
+    "dev": "foreman start -f Procfile.dev -p 3000"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",

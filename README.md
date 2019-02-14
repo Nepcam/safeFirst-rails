@@ -12,3 +12,7 @@ The application will cover the following;
 ## API Documentation
 
 * [Doc](docs/API.md)
+
+
+## Starting up the app locally
+- foreman start -f Procfile.dev -p 3000
