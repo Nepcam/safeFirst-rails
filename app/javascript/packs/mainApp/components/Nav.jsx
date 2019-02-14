@@ -59,18 +59,37 @@ class Nav extends React.Component {
               </Link>,
               <Link onClick={ this.closeBurger } to="/incidents" key="incidents" className="navbar-item">
                 Incidents
-              </Link>
+              </Link>,
             ] : '' }
           </div>
           <div className="navbar-end">
             <div className="navbar-item">
               { isAuthenticated ?
                 <div className="buttons">
-                  { userName && <p className="navbar-item">Hello, { userName }</p> }
-                  <button className="button is-dark" onClick={ logout }>
-                    Log Out
-                  </button>
-                </div> :
+                { userName && <p className="navbar-item">Hello, { userName }</p> }
+                  <div className="dropdown is-right is-hoverable">
+                    <div className="dropdown-trigger">
+                      <button className="button is-dark" aria-haspopup="true" aria-controls="dropdown-menu4">
+                        <span>Account</span>
+                        <span className="icon is-small">
+                          <i className="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div> 
+                    <div className="dropdown-menu" id="dropdown-menu4" role="menu">
+                      <div className="dropdown-content">
+                        <div className="dropdown-item">
+                        <Link onClick={ this.closeBurger } to="/sites" key="sites" className="navbar-item">
+                          Sites
+                        </Link>
+                        <Link onClick={ logout } className="navbar-item" to="" key="" className="navbar-item">
+                          Log Out
+                        </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>:
                 <div className="buttons">
                   <Link onClick={ this.closeBurger } to="/register" key="register" className="button is-primary">
                     Register

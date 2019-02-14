@@ -8,6 +8,7 @@ import Landing from './Landing';
 import Incidents from './Incidents';
 import Hsmeeting from './Hsmeeting';
 import DailyMeeting from './DailyMeeting';
+import Sites from './Sites';
 import Nav from './Nav';
 import SafetyMeetContainer from './SafetyMeetContainer';
 
@@ -35,7 +36,8 @@ class App extends React.Component {
       <Route key="1" path="/incidents" component={ Incidents }/>,
       <Route key="2" path="/hsmeeting" component={ Hsmeeting }/>,
       <Route key="3" path="/hsmeetinglist" component={ SafetyMeetContainer }/>,
-      <Route key="4" path="/dailymeeting" component={ DailyMeeting }/>
+      <Route key="4" path="/dailymeeting" component={ DailyMeeting }/>,
+      <Route key="5" path="/sites" component={ Sites }/>
     ]
   }
 
@@ -55,7 +57,9 @@ class App extends React.Component {
       <Router>
         <div id={ (isCoverPage && !isAuthenticated) ? 'full-cover' : '' }>
           <Nav/>
-          { isAuthenticated ? App.authenticatedComponent() : App.nonauthenticatedComponent() }
+          <div className="container is-fluid">
+            { isAuthenticated ? App.authenticatedComponent() : App.nonauthenticatedComponent() }
+          </div>
         </div>
       </Router>
     )
