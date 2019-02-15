@@ -1,5 +1,6 @@
 const initialState = {
   isFetching: false,
+  current: null,
   sites: [],
   errorMessage: ''
 };
@@ -12,9 +13,16 @@ export default function sites(state = initialState, action) {
         isFetching: true,
       };
     case 'SITES_FETCH_SUCCESS':
+      let currentSite = state.current;
+
+      if (action.sites.length === 1) {
+        currentSite = action.sites[0];
+      }
+
       return {
         ...state,
         sites: action.sites,
+        current: currentSite,
         isFetching: false
       };
     case 'SITES_FETCH_FAILURE':
@@ -39,6 +47,11 @@ export default function sites(state = initialState, action) {
         ...state,
         isFetching: false,
         errorMessage: action.message
+      };
+    case 'SITE_SET_CURRENT':
+      return {
+        ...state,
+        current: action.siteId
       };
     default:
       return state

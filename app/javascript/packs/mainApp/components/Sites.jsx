@@ -2,7 +2,7 @@ import React from 'react';
 import connect from "react-redux/es/connect/connect";
 import SiteForm from './SiteForm';
 import PageTitle from './PageTitle';
-import { fetchSites } from '../actions/sites';
+import { fetchSites, siteSetCurrent } from '../actions/sites';
 
 class Sites extends React.Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class Sites extends React.Component {
     };
 
     this.toggleForm = this.toggleForm.bind(this);
+    this.setAsCurrentSite = this.setAsCurrentSite.bind(this);
   }
 
   componentDidMount() {
@@ -26,13 +27,18 @@ class Sites extends React.Component {
   renderSites() {
     const { sites } = this.props;
 
-
     return sites.map((site, index) => {
-      return Sites.renderSite(site, index)
+      return this.renderSite(site, index)
     });
   }
 
-  static renderSite(site, index) {
+  setAsCurrentSite(siteId, evt) {
+    this.props.dispatch(siteSetCurrent(siteId));
+  }
+
+  renderSite(site, index) {
+    const { current } = this.props;
+
     return <div className="column is-one-quarter" key={ index }>
       <article className="tile is-child box">
         <p className="title">{ site.name }</p>
@@ -42,7 +48,15 @@ class Sites extends React.Component {
           </span>
           { site.location }
         </p>
-        <button className="button is-dark">Set as Current</button>
+        { current && site.id === current ? <div className="control">
+            <div className="tags has-addons">
+              <span className="tag is-primary is-medium">Current</span>
+            </div>
+          </div> :
+          <button className="button is-dark" onClick={ this.setAsCurrentSite.bind(this, site.id) }>
+            Set as Current
+          </button>
+        }
       </article>
     </div>
   }
@@ -77,6 +91,7 @@ class Sites extends React.Component {
 const mapStateToProps = ({ sites }) => {
   return {
     sites: sites.sites,
+    current: sites.current,
     isFetching: sites.isFetching,
     errorMessage: sites.errorMessage
   }

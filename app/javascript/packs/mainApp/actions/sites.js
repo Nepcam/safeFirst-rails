@@ -77,3 +77,10 @@ export function fetchSites() {
       });
   };
 }
+
+export function siteSetCurrent(siteId) {
+  return {
+    type: 'SITE_SET_CURRENT',
+    siteId
+  }
+}
