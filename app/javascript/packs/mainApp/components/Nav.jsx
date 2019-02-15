@@ -29,7 +29,7 @@ class Nav extends React.Component {
   }
 
   render() {
-    const { isAuthenticated, userName, logout } = this.props;
+    const { isAuthenticated, userName, logout, currentSite } = this.props;
     const { showBurger } = this.state;
 
     return (
@@ -50,7 +50,7 @@ class Nav extends React.Component {
 
         <div id="sf-navbar" className={ `navbar-menu ${showBurger ? 'is-active' : ''}` }>
           <div className="navbar-start">
-            { isAuthenticated ? [
+            { isAuthenticated && currentSite ? [
               <Link onClick={ this.closeBurger } to="/dailymeeting" key="dailymeeting" className="navbar-item">
                 Daily Meeting
               </Link>,
@@ -113,10 +113,11 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, sites }) => {
   return {
     isAuthenticated: auth.isAuthenticated,
-    userName: auth.userName
+    userName: auth.userName,
+    currentSite: sites.current
   }
 };
 

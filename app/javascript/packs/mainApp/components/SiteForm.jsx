@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import { createSite } from '../actions/site';
+import { connect } from 'react-redux';
+import { createSite } from '../actions/sites';
 
 class SiteForm extends React.Component {
   constructor(props) {
@@ -22,12 +22,12 @@ class SiteForm extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    
+
     this.props.dispatch(createSite({ site: this.state }));
   }
 
   render() {
-    const { isFetching, errorMessage } = this.props;
+    const { isFetching, errorMessage, toggleForm } = this.props;
 
     return (
       <div>
@@ -41,16 +41,19 @@ class SiteForm extends React.Component {
           { errorMessage && <p className="help is-danger is-large">{ errorMessage }</p> }
           <div className="field">
             <label className="label" htmlFor="name">Name:</label>
-              <input className="input" type="text" name="name" onChange={ this.handleChange }/>
+            <input className="input" type="text" name="name" onChange={ this.handleChange }/>
           </div>
 
           <div className="field">
             <label className="label" htmlFor="location">Location:</label>
-              <input className="input" type="text" name="location" onChange={ this.handleChange }/>
+            <input className="input" type="text" name="location" onChange={ this.handleChange }/>
           </div>
           <div className="field is-grouped">
             <div className="control">
-              <button className="button is-primary" disabled={isFetching}>Create Site</button>
+              <button className="button is-primary" disabled={ isFetching }>Create Site</button>
+            </div>
+            <div className="control">
+              <button onClick={ toggleForm } className="button is-text">Cancel</button>
             </div>
           </div>
         </form>
@@ -59,10 +62,10 @@ class SiteForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ site }) => {
+const mapStateToProps = ({ sites }) => {
   return {
-    errorMessage: site.errorMessage,
-    isFetching: site.isFetching
+    errorMessage: sites.errorMessage,
+    isFetching: sites.isFetching
   }
 };
 

@@ -6,9 +6,9 @@ class SitesController < ApplicationController
   end
 
   def create
-    site = current_user.sites.new(site_params)
-    
-    if site.save
+    site = current_user.sites.build(site_params)
+
+    if current_user.save
       render json: { site: site.as_json }
     else
       render json: { errors: site.errors.full_messages }, status: :bad_request
