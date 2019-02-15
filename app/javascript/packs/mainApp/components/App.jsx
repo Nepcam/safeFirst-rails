@@ -29,19 +29,21 @@ class App extends React.Component {
   //   }
   // }
 
-  // When logged in, show the following components: Header & Dashboard
-  static authenticatedComponent() {
-    return [
+  // When logged in, all the following routes depending on if a site is set
+  authenticatedComponent() {
+     const { currentSite } = this.props;
+
+    return !!currentSite ? [
       <Route key="0" exact path="/" component={ Dashboard }/>,
       <Route key="1" path="/incidents" component={ Incidents }/>,
       <Route key="2" path="/hsmeeting" component={ Hsmeeting }/>,
       <Route key="3" path="/hsmeetinglist" component={ SafetyMeetContainer }/>,
       <Route key="4" path="/dailymeeting" component={ DailyMeeting }/>,
       <Route key="5" path="/sites" component={ Sites }/>
-    ]
+    ] : [<Route key="5" path="/sites" component={ Sites }/>]
   }
 
-  // When NOT logged in, show the following components: Nav & Landing
+  // When NOT logged in, all the following routes
   static nonauthenticatedComponent() {
     return [
       <Route key="0" exact path="/" component={ Landing }/>,
@@ -51,14 +53,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { isAuthenticated, isCoverPage } = this.props.auth;
+    const { isAuthenticated, isCoverPage } = this.props;
 
     return (
       <Router>
         <div id={ (isCoverPage && !isAuthenticated) ? 'full-cover' : '' }>
           <Nav/>
           <div className="container is-fluid">
-            { isAuthenticated ? App.authenticatedComponent() : App.nonauthenticatedComponent() }
+            { isAuthenticated ? this.authenticatedComponent() : App.nonauthenticatedComponent() }
           </div>
         </div>
       </Router>
@@ -66,9 +68,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ auth, sites }) => {
   return {
-    auth: state.auth
+    isAuthenticated: auth.isAuthenticated,
+    isCoverPage: auth.isCoverPage,
+    currentSite: sites.current
   }
 };
 
