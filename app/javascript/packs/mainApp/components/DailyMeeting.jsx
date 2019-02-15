@@ -11,8 +11,12 @@ export default class DailyMeeting extends React.Component {
     return (
       <div>
         <PageTitle title="Daily Meeting" />
-        <div>
-          <HazardForm { ...this.props } />
+        <div className="columns">
+          <div className="column">
+            <HazardForm { ...this.props } />
+          </div>
+          <div className ="column">
+          </div>
         </div>
       </div>
     )

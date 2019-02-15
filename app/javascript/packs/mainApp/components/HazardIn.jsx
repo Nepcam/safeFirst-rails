@@ -63,7 +63,7 @@ class HazardIn extends React.Component {
           </label>
           <br/>
           <div className="control">
-            <button className="button is-info">Add Hazard to Dashboard</button>
+            <button className="button is-primary">Add Hazard to Dashboard</button>
           </div>
         </form>
       </div>

@@ -36,7 +36,7 @@ class Login extends React.Component {
     return (
       <div className="login-registration login">
         <form onSubmit={ this.submit }>
-          { errorMessage && <p className="help is-danger is-large">{ errorMessage }</p> }
+          { errorMessage && <p className="help is-text is-large">{ errorMessage }</p> }
           <div className="field">
             <label className="label" htmlFor="email">Email</label>
             <div className="control has-icons-left has-icons-right">

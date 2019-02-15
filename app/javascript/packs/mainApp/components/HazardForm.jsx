@@ -12,7 +12,6 @@ class HazardForm extends React.Component {
       daily: 'true'
 
     };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.refreshForm = this.refreshForm.bind(this);
@@ -38,7 +37,7 @@ class HazardForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <form onSubmit={ this.handleSubmit }>
         <div className="block">
           <h1 className="title">Hazard Form</h1>
           <p className="content">
@@ -46,24 +45,42 @@ class HazardForm extends React.Component {
             All submitted hazards will be visible on the dashboard.
           </p>
         </div>
-        <form onSubmit={ this.handleSubmit }>
-          <label className="label">Hazard:
-            <input className="input" type="text" name="hazard" onChange={ this.onSubmit }/>
-          </label>
-          <br/>
-          <label className="label">Risk:
-            <input className="input" type="text" name="risk" onChange={ this.onSubmit }/>
-          </label>
-          <br/>
-          <label className="label">Control:
-            <input className="input" type="text" name="control" onChange={ this.onSubmit }/>
-          </label>
-          <br/>
-          <div className="control">
-            <button className="button is-info">Add Hazard to Dashboard</button>
+        <div>
+          <div className="field">
+            <label className="label">Hazard Category:</label>
+            <div className="select is-fullwidth">
+              <select name="hazard_category" onChange={ this.onSubmit }>
+                <option value=""></option>
+              </select>
+            </div>
           </div>
-        </form>
-      </div>
+          <div className="field">
+            <label className="label">Hazard Description:</label>
+            <input className="input" type="text" name="name" onChange={ this.onSubmit }/>
+          </div>
+          <div className="field">
+            <label className="label">Risk Rating:</label>
+            <input className="input" type="text" name="risk" onChange={ this.onSubmit }/>
+          </div>
+          <div className="field">
+            <label className="label">Control Category:</label>
+            <div className="select is-fullwidth">
+              <select name="hazard_control_category" onChange={ this.onSubmit }>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Means of Control:</label>
+            <input className="input" type="text" name="control" onChange={ this.onSubmit }/>
+          </div>
+          <div className="field">
+            <div className="control">
+              <button className="button is-primary">Add Hazard to Dashboard</button>
+            </div>
+          </div>
+        </div>
+      </form>
     )
   }
 }
