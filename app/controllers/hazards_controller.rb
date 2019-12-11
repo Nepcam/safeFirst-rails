@@ -11,6 +11,12 @@ class HazardsController < ApplicationController
     render json: hazards.as_json(hazards_json_keys)
   end
 
+  def create
+    site = Site.find(params[:site_id])
+    site.hazards.build(hazard_params)
+    site.save
+  end
+
   private
 
   def hazards_json_keys
@@ -20,5 +26,9 @@ class HazardsController < ApplicationController
         hazard_category:       { only: [:id, :name] }
       }
     }
+  end
+
+  def hazard_params
+    params.require(:hazard).permit(:name, :risk, :control, :hazard_control_method_id, :hazard_category_id)
   end
 end

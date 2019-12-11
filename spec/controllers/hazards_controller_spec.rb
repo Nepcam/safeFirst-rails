@@ -41,4 +41,18 @@ RSpec.describe HazardsController do
       expect(result.map(&extract_id)).to eq(Hazard.where(site: [site, nil]).pluck(:id))
     end
   end
+
+  describe 'POST #create' do
+    subject { post :create, params: { site_id: site.id, hazard: { name: 'test', control: 'test', risk: '1', hazard_control_method_id: '1', hazard_category_id: '1' } } }
+
+    before do
+      request.headers.merge! auth_headers
+      create(:hazard_category)
+      create(:hazard_control_method)
+    end
+
+    it 'creates a hazard' do
+      expect { subject }.to change { Hazard.count }.by 1
+    end
+  end
 end

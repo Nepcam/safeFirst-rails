@@ -48,7 +48,7 @@ class Register extends React.Component {
     return (
       <div className="login-registration registration">
         <form onSubmit={ this.submit }>
-          { errorMessage && <p className="help is-danger is-large">{ errorMessage }</p> }
+          { errorMessage && <p className="help is-text is-large">{ errorMessage }</p> }
           <div className="field">
             <label className="label" htmlFor="name">Name</label>
             <div className="control">

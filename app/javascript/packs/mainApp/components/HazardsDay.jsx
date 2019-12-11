@@ -66,7 +66,7 @@ export default class HazardsDay extends React.Component {
             </table>
           </div>
           <div className="control">
-            <Link to="/dailymeeting" className="button is-info">Create a New Hazard</Link>
+            <Link to="/dailymeeting" className="button is-primary">Create a New Hazard</Link>
           </div>
         </div>
         <br/><br/>

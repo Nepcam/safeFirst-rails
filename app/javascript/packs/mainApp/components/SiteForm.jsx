@@ -38,7 +38,7 @@ class SiteForm extends React.Component {
           </p>
         </div>
         <form onSubmit={ this.handleSubmit }>
-          { errorMessage && <p className="help is-danger is-large">{ errorMessage }</p> }
+          { errorMessage && <p className="help is-text is-large">{ errorMessage }</p> }
           <div className="field">
             <label className="label" htmlFor="name">Name:</label>
             <input className="input" type="text" name="name" onChange={ this.handleChange }/>
